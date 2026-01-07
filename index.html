@@ -759,7 +759,7 @@
             }
         }
 
-        form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const organization = document.getElementById('organization').value;
@@ -770,12 +770,21 @@
             const contact = document.getElementById('contact').value;
             const message = document.getElementById('message').value;
 
-            const mailtoLink = `mailto:hosunmoon1@gmail.com?subject=소상공인 AI 교육 문의 - ${organization}&body=기관명/개인명: ${organization}%0A업종: ${business}%0A교육 대상: ${audience}%0A관심 프로그램: ${program}%0A연락처(이름): ${name}%0A연락처(전화/이메일): ${contact}%0A%0A추가 문의사항:%0A${message}`;
+            const subject = `소상공인 AI 교육 문의 - ${organization}`;
+            const body = `기관명/개인명: ${organization}
+업종: ${business}
+교육 대상: ${audience}
+관심 프로그램: ${program}
+연락처(이름): ${name}
+연락처(전화/이메일): ${contact}
+
+추가 문의사항:
+${message}`;
+
+            const mailtoLink = `mailto:hosunmoon1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             window.location.href = mailtoLink;
             closeModal();
             form.reset();
         });
-    </script>
-</body>
-</html>
+
